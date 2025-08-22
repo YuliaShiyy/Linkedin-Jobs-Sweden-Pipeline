@@ -62,6 +62,7 @@ See requirements.txt for full dependencies.
     cd analysis/notebooks
     jupyter notebook analysis.ipynb
   This cleans data, produces visualizations, and generates the report.
+
 3. Outputs
 
   - Cleaned dataset under /analysis/data/
