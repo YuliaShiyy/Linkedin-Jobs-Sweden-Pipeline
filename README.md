@@ -11,11 +11,13 @@ It integrates:
 
 ## 🔗 Workflow
     ```mermaid
-        flowchart LR
-        A[Scraper] --> B[Raw Job Data CSV]
-        B --> C[Data Cleaning + Enrichment]
-        C --> D[Analysis & Visualizations]
-        D --> E[Word Report]
+    flowchart LR
+    A[Scraper] --> B[Raw Job Data CSV]
+    B --> C[Data Cleaning + Enrichment]
+     C --> D[Analysis & Visualizations]
+    D --> E[Word Report]
+
+---
 
 📊 Features
 
