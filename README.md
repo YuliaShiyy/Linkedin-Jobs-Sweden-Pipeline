@@ -4,7 +4,7 @@ This repository demonstrates an **end-to-end project**:
 from scraping LinkedIn job postings to cleaning, analyzing, and generating reports.  
 
 It integrates:  
-- [linkedin-jobs-scraper](https://github.com/yuliashiyy/linkedin-jobs-scraper)  
+- [linkedin-jobs-scraper](https://github.com/YuliaShiyy/Linkedin-Jobs-Sweden-Scraper)  
 - [linkedin-jobs-analysis](https://github.com/yuliashiyy/linkedin-jobs-analysis)  
 
 ---
