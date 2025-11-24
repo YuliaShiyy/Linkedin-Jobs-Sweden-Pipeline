@@ -16,7 +16,7 @@ from get_data import (
 )
 
 # ---------------- parameters ----------------
-COOKIE_FILE = "cookies.pkl"  # 请在本地准备好，不要上传到GitHub
+COOKIE_FILE = "cookies.pkl"  # prepare on local system
 START_PAGE = 0       # start page : page 1 -> start_page = 0; page 2 -> start_page = 25; page 3 -> start_page = 50
 PAGE_SIZE = 25       # job numbers per page
 PAGE_TOTAL = 40    # end page of data you want to scrap
@@ -77,3 +77,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
