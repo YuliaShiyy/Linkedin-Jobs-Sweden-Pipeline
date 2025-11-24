@@ -1,6 +1,6 @@
 # @Author : Yulia
 # @File   : get_data.py
-# @Time   : 2025/8/6 16:43
+# @Time   : 2025/08/06 16:43
 import os
 import random
 import time
@@ -9,6 +9,12 @@ from deep_translator import GoogleTranslator
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
+# LLM enrichment functions
+from llm_enrichment import (
+    normalize_job_title,
+    classify_job_category,
+    extract_skills
+)
 
 def get_job_ids_on_current_page(driver, wait):
     """get all job_id on current page"""
@@ -83,8 +89,11 @@ def scrape_job_details(driver, wait, job_id, idx, page_start, failed_jobs):
                 job_detail = "N/A"
         if isinstance(job_detail, list):
             job_detail = "\n".join(job_detail)
-        job_detail_en = GoogleTranslator(source='auto', target='en').translate(job_detail)
-        print(job_detail_en)
+        # Translate detail to English for LLM
+        try:
+            job_detail_en = GoogleTranslator(source='auto', target='en').translate(job_detail)
+        except:
+            job_detail_en = job_detail  # fallback
 
         # descriptions for each page
         job_description_elements = wait.until(
@@ -92,7 +101,32 @@ def scrape_job_details(driver, wait, job_id, idx, page_start, failed_jobs):
         )
         job_description = "\n".join([el.text.strip() for el in job_description_elements])
 
+        # ========== LLM ENRICHMENT ==========
+        try:
+            normalized_title = normalize_job_title(title, job_description)
+        except:
+            normalized_title = title
+
+        try:
+            category = classify_job_category(job_description)
+        except:
+            category = "N/A"
+
+        try:
+            skills = extract_skills(job_description)
+        except:
+            skills = "[]"
+
+        print(f" LLM normalized title: {normalized_title}")
+        print(f" LLM category: {category}")
+        print(f" LLM skills: {skills}")
+
+        # ================= RETURN STRUCTURED DATA =================
         return {
+            "job_id": job_id,
+            "url": job_url,
+
+            # original fields
             "title": title,
             "company": company,
             "location": location,
@@ -100,7 +134,11 @@ def scrape_job_details(driver, wait, job_id, idx, page_start, failed_jobs):
             "application_number": application_number,
             "detail": job_detail_en,
             "description": job_description,
-            "url": job_url
+
+            # LLM enrichment fields
+            "normalized_title": normalized_title,
+            "category": category,
+            "skills": skills,
         }
 
     except Exception as e:
