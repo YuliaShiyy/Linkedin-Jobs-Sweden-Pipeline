@@ -22,19 +22,19 @@ It integrates:
 
 📊 Key Features
 
-Automated scraping with Selenium
+- Automated scraping with Selenium
 
-Deduplication using job_id
+- Deduplication using job_id
 
-Data cleaning and enrichment (LLM-Ready / Rule-Based)
+- Data cleaning and enrichment (LLM-Ready / Rule-Based)
 
-Exploratory data analysis (EDA)
+- Exploratory data analysis (EDA)
 
-Competitiveness metric (applications per day)
+- Competitiveness metric (applications per day)
 
-Visualizations: job distribution, applications histogram, skills demand word cloud
+- Visualizations: job distribution, applications histogram, skills demand word cloud
 
-Word report (English)
+- Word report (English)
 
 
 📂 Project Structure
