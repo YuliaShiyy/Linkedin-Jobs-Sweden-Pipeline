@@ -1,16 +1,16 @@
 # LinkedIn Jobs Pipeline
 
-This repository demonstrates an **end-to-end project**:  
-from scraping LinkedIn job postings to cleaning, analyzing, and generating reports.  
+**An end-to-end, AI-powered data engineering pipeline**: From scraping raw job postings to Local LLM extraction, semantic analysis, and reporting.
 
 It integrates:  
-- [linkedin-jobs-scraper](https://github.com/YuliaShiyy/Linkedin-Jobs-Sweden-Scraper)  
-- [linkedin-jobs-analysis](https://github.com/yuliashiyy/linkedin-jobs-analysis)  
+- [linkedin-jobs-scraper](https://github.com/YuliaShiyy/Linkedin-Jobs-Sweden-Scraper) (Data Ingestion)  
+- [linkedin-jobs-analysis](https://github.com/yuliashiyy/linkedin-jobs-analysis) (Local AI & RAG Engine) 
 
 ---
 
-## 🔗 Workflow
-
+## 🔗 The AI-Enhanced Workflow
+The pipeline has evolved from simple rule-based cleaning to a Hybrid AI Architecture:
+Phase 1:
  ```mermaid
  flowchart LR
     A[Scraper] --> B[Raw Job Data CSV]
@@ -18,41 +18,70 @@ It integrates:
     C --> D[Analysis & Visualizations]
     D --> E[Word Report]
 ```
+Phase 2:
+```mermaid
+flowchart LR
+    A[Selenium Scraper] -->|Raw Data| B(Pre-processing)
+    B --> C{Local AI Engine\nOllama + Llama 3}
+    C -->|Hybrid Extraction| D[Structured JSON\nSkills & Experience]
+    D --> E[RAG & Analysis]
+    E --> F[Visualizations\n& Word Report]
+    
+    style C fill:#f9f,stroke:#333,stroke-width:2px
+    style D fill:#bbf,stroke:#333,stroke-width:2px
 
+```
+---
 
-📊 Key Features
+## 📊 Key Features
 
-- Automated scraping with Selenium
+1. Data Ingestion (Scraping)
+ - Automated Scraping: Selenium-based crawler for LinkedIn Sweden.
 
-- Deduplication using job_id
+ - Robustness: Handles pagination, login handling, and anti-bot measures.
 
-- Data cleaning and enrichment (LLM-Ready / Rule-Based)
+2. AI Processing (The Upgrade) ✨
+ - Local LLM Integration: Uses Ollama (Llama 3.2) for privacy-preserving processing.
 
-- Exploratory data analysis (EDA)
+ - Hybrid Extraction: Combines Regex (for metadata) + AI (for semantic skill extraction).
 
-- Competitiveness metric (applications per day)
+ - Semantic Normalization: Auto-translates and standardizes multi-lingual (Swedish/English) titles.
 
-- Visualizations: job distribution, applications histogram, skills demand word cloud
+3. Analytics & Reporting
+ - Competitiveness Metric: Calculates applications per day to gauge market heat.
 
-- Word report (English)
+ - Local RAG: "Chat-with-Data" capability using Vector Search.
 
+ - Automated Reporting: Generates a Word document summary of key insights.
 
-📂 Project Structure
+---
+
+## 📂 Project Structure
 
     linkedin-jobs-pipeline/
     │
-    ├── scraping/            # Scraper module
-    ├── analysis/            # Analysis module
-    ├── data/                # Sample datasets only
+    ├── scraping/            # Submodule: Selenium Scraper
+    ├── analysis/            # Submodule: Local AI & RAG Engine
+    ├── data/                # Sample datasets for reproducibility
     ├── report/              # Final Word report
     ├── requirements.txt
     └── README.md
 
-⚙️ Requirements
+## ⚙️ Requirements
+Core dependencies include:
+
+ - Python 3.10+
+
+ - Ollama (Running llama3.2)
+
+ - Selenium & LangChain
 
 See requirements.txt for full dependencies.
 
-🚀 Usage
+---
+
+## 🚀 Usage
+### Phase 1:
 
 1. Scraping
    ```bash
@@ -74,12 +103,25 @@ See requirements.txt for full dependencies.
   
   - Report under /analysis/report/
 
-⚠️ Data Disclaimer
+### Phase 2:
+Process the data using the Local AI engine:
+```bash
+ cd analysis
+ # Ensure Ollama is running: `ollama run llama3.2`
+ jupyter notebook notebooks/ai_features_demo.ipynb
+ ```
+This step extracts structured skills, performs RAG queries, and updates visualizations.
+
+---
+
+## ⚠️ Data Disclaimer
 
 Due to LinkedIn’s Terms of Service, raw scraped data is not shared in this repository.
 Instead, we provide a sample dataset for reproducibility, along with the cleaned dataset used in the analysis.
 
-📌 Related Repositories
+---
+
+## 📌 Related Repositories
 
 - [LinkedIn Jobs Scraper](https://github.com/yuliashiyy/linkedin-jobs-scraper)  
 - [LinkedIn Jobs Analysis](https://github.com/yuliashiyy/linkedin-jobs-analysis)  
